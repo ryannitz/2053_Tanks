@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTankController : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class PlayerTankController : MonoBehaviour
     private SpriteRenderer rend;
     //private Animator anim;
     public GameObject bullet;
+    public Text playerLives;
+    public GameController gameController;
 
     public float speed = 1.0f;
     private bool canFire = true;
+    private int hitCount = 0;
+    private string LOSE_TEXT = "Player Loses";
 
 
     //public GameController gameController;
@@ -21,6 +26,7 @@ public class PlayerTankController : MonoBehaviour
     {
         velocity = new Vector3(0f, 0f, 0f);
         rend = GetComponent<SpriteRenderer>();
+        playerLives.text = "";
         //anim = GetComponent<Animator>();
     }
 
@@ -73,15 +79,17 @@ public class PlayerTankController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Collision detected");
-        //uncomment this in the next step
-        //to notify the GameController that the game is over
+
         //gameController.GameOver();
-
-        //this get rid of your PacMan
-
         //if(missile){add damage count}
 
-        Destroy(gameObject);
+        hitCount++;
+        if (hitCount >= 3)
+        {
+            Destroy(gameObject);
+            gameController.GameOver(LOSE_TEXT);
+        }
+        playerLives.text += "X";
     }
 
     //will wait 3 seconds and then will reset the flag

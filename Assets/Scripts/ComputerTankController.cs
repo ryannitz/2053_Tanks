@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //add this import statement for Random number generation
 using Random = UnityEngine.Random;
 
@@ -11,10 +12,14 @@ public class ComputerTankController : MonoBehaviour
     private SpriteRenderer rend;
     //private Animator anim;
     public GameObject bullet;
+    public Text computerLives;
+    public GameController gameController;
 
 
     public float speed = 1.0f;
     private bool canFire = true;
+    private int hitCount = 0;
+    private string LOSE_TEXT = "Computer Loses";
 
     // Use this for initialization
     void Start()
@@ -25,6 +30,7 @@ public class ComputerTankController : MonoBehaviour
 
         velocity = new Vector3((float)startx, 0f, 0f);
         rend = GetComponent<SpriteRenderer>();
+        computerLives.text = "";
         //anim = GetComponent<Animator>();
         //anim.Play("RedGhostRight");
     }
@@ -38,10 +44,10 @@ public class ComputerTankController : MonoBehaviour
         if (canFire)
         {
             Debug.Log("FIRE");
-            Vector3 offset = new Vector3(0f, 2f, 0f);
+            Vector3 offset = new Vector3(0f, -2f, 0f);
             GameObject b = Instantiate(bullet, new Vector3(0f, 0f, 0f), Quaternion.AngleAxis(180, Vector2.left));
 
-            b.GetComponent<BulletController>().InitPosition(transform.position + offset, new Vector3(0f, -2f, 0f));
+            b.GetComponent<BulletController>().InitPosition(transform.position + offset, new Vector3(0f, 2f, 0f));
             canFire = false;
 
             //this starts a coroutine... a non-blocking function
@@ -81,6 +87,23 @@ public class ComputerTankController : MonoBehaviour
             //anim.Play("RedGhostLeft");
         }
         transform.position = transform.position + velocity * Time.deltaTime * speed;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        //Debug.Log("Collision detected");
+        //gameController.GameOver();
+
+
+        //if(missile){add damage count}
+        hitCount++;
+        if (hitCount >= 3)
+        {
+            Destroy(gameObject);
+            gameController.GameOver(LOSE_TEXT);
+        }
+        computerLives.text += "X";
     }
 
     //will wait 3 seconds and then will reset the flag
