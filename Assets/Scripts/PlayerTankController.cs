@@ -8,26 +8,25 @@ public class PlayerTankController : MonoBehaviour
     private Vector3 velocity;
 
     private SpriteRenderer rend;
-    //private Animator anim;
     public GameObject bullet;
     public Text playerLives;
     public GameController gameController;
+    public AudioSource gunAudio;
 
     public float speed = 1.0f;
     private bool canFire = true;
     private int hitCount = 0;
     private string LOSE_TEXT = "Player Loses";
 
-
-    //public GameController gameController;
+    
 
     // Use this for initialization
     void Start()
     {
+        gunAudio = GetComponent<AudioSource>();
         velocity = new Vector3(0f, 0f, 0f);
         rend = GetComponent<SpriteRenderer>();
         playerLives.text = "";
-        //anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,6 +38,7 @@ public class PlayerTankController : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && canFire)
         {
             //the offset 
+            gunAudio.Play();
             Vector3 offset = new Vector3(0f, 2f, 0f);
             //create a bullet pointing in its natural direction 
             GameObject b = Instantiate(bullet, new Vector3(0f, 0f, 0f), Quaternion.identity);
@@ -79,10 +79,7 @@ public class PlayerTankController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Collision detected");
-
-        //gameController.GameOver();
-        //if(missile){add damage count}
-
+      
         hitCount++;
         if (hitCount >= 3)
         {

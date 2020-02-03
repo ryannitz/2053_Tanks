@@ -10,10 +10,10 @@ public class ComputerTankController : MonoBehaviour
     private Vector3 velocity;
 
     private SpriteRenderer rend;
-    //private Animator anim;
     public GameObject bullet;
     public Text computerLives;
     public GameController gameController;
+    public AudioSource gunAudio;
 
 
     public float speed = 1.0f;
@@ -31,8 +31,7 @@ public class ComputerTankController : MonoBehaviour
         velocity = new Vector3((float)startx, 0f, 0f);
         rend = GetComponent<SpriteRenderer>();
         computerLives.text = "";
-        //anim = GetComponent<Animator>();
-        //anim.Play("RedGhostRight");
+        gunAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,6 +43,7 @@ public class ComputerTankController : MonoBehaviour
         if (canFire)
         {
             Debug.Log("FIRE");
+            gunAudio.Play();
             Vector3 offset = new Vector3(0f, -2f, 0f);
             GameObject b = Instantiate(bullet, new Vector3(0f, 0f, 0f), Quaternion.AngleAxis(180, Vector2.left));
 
@@ -79,12 +79,10 @@ public class ComputerTankController : MonoBehaviour
         if ((transform.position.x <= leftBorder + width / 2.0) && velocity.x < 0f)
         {
             velocity = new Vector3(1f, 0f, 0f);
-            //anim.Play("RedGhostRight");
         }
         if ((transform.position.x >= rightBorder - width / 2.0) && velocity.x > 0f)
         {
             velocity = new Vector3(-1f, 0f, 0f);
-            //anim.Play("RedGhostLeft");
         }
         transform.position = transform.position + velocity * Time.deltaTime * speed;
     }
@@ -93,10 +91,6 @@ public class ComputerTankController : MonoBehaviour
     {
 
         //Debug.Log("Collision detected");
-        //gameController.GameOver();
-
-
-        //if(missile){add damage count}
         hitCount++;
         if (hitCount >= 3)
         {

@@ -69,6 +69,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/School/2053/Unity Projects/Lab 3 - Tanks/Tanks/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>E:/School/2053/Unity Projects/Lab 3 - Tanks/Tanks/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>E:/School/2053/Unity Projects/Lab 3 - Tanks/Tanks/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
@@ -83,9 +86,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>E:/School/2053/Unity Projects/Lab 3 - Tanks/Tanks/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/School/2053/Unity Projects/Lab 3 - Tanks/Tanks/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>E:/Programs/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
